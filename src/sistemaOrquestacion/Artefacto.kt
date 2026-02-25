@@ -1,3 +1,3 @@
 package sistemaOrquestacion
 
-data class Artefacto(val nombre: String, val hash: String)
+data class Artefacto(val nombre: String, val hash: Int)
