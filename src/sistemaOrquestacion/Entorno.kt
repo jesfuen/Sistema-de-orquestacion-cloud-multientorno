@@ -1,24 +1,19 @@
 package sistemaOrquestacion
 
-abstract class Entorno(val nombre: String, val region: String) {
-    abstract fun desplegarArtefacto()
-    open val listaArtefactos: MutableList<Artefacto> = mutableListOf()
-}
+// Open class porque las clases hijas no necesitan definir el funcionamiento de desplegarArtefacto()
+open class Entorno(val nombre: String, val region: String) {
 
-class ClusterKubernetes(nombre: String, region: String, nodos: Int, version: String): Entorno(nombre, region) {
-    override fun desplegarArtefacto() {
-        TODO("Not yet implemented")
+    // Lista mutable para añadir artefactos para cada entorno
+    val listaArtefactos: MutableList<Artefacto> = mutableListOf()
+
+    // Funcion ya definida porque las tres clases únicamente se encargan de añadir a la lista los artefactos de la misma manera
+    fun desplegarArtefacto(artefacto: Artefacto) {
+        listaArtefactos.add(artefacto)
     }
 }
 
-class ServerlessLambda(nombre: String, region: String, memoria: Double, runtime: Double): Entorno(nombre, region) {
-    override fun desplegarArtefacto() {
-        TODO("Not yet implemented")
-    }
-}
+class ClusterKubernetes(nombre: String, region: String, nodos: Int, version: String): Entorno(nombre, region)
 
-class InstanciaVirtual(nombre: String, region: String, arquitectura: String, so: String): Entorno(nombre, region) {
-    override fun desplegarArtefacto() {
-        TODO("Not yet implemented")
-    }
-}
+class ServerlessLambda(nombre: String, region: String, memoria: Double, runtime: Double): Entorno(nombre, region)
+
+class InstanciaVirtual(nombre: String, region: String, arquitectura: String, so: String): Entorno(nombre, region)
